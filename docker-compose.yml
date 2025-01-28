@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - NODE_OPTIONS=--max-old-space-size=4096 # Increase Node.js memory limit
+    ports:
+      - '3000:3000' # Expose port 3000 for your app
+    volumes:
+      - .:/app # Mount the current directory as a volume to the container
+    command: ['yarn', 'start'] # Start the app using yarn start
+    restart: always # Ensure the container restarts automatically if it fails
+
